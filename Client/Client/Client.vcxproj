@@ -139,10 +139,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Avatar.cpp" />
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="NetworkClient.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Avatar.h" />
     <ClInclude Include="NetworkClient.h" />
     <ClInclude Include="Protocols.h" />
   </ItemGroup>

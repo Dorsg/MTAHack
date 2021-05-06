@@ -1,23 +1,16 @@
 #pragma once
 #include <iostream>
 #include <string>
-
+#include "Avatar.h"
 
 
 using namespace std;
 namespace hackTeam {
 
-	struct Location {
-		int x;
-		int y;
-	};
+	
 
 
-	struct Avatar {
-		Location location;
-		char status;
-		string unuiqueKey;
-	};
+	
 
 	class Protocols{
 	private:
@@ -38,7 +31,7 @@ namespace hackTeam {
 		const int Size_Location = 4;
 
 		const int unuiqueIdSize = 10;
-		string createStringFromLocation(const Location& location){
+		string createStringFromLocation(Location& location){
 			string x = to_string(location.x);
 			string y = to_string(location.y);
 			x.append(y);

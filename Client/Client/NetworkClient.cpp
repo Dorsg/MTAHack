@@ -5,7 +5,7 @@ using namespace std;
 namespace hackTeam {
 
 	/*Ctor and Dtor*/
-	NetworkClient::NetworkClient(string& _id) : bytesSent(0), bytesRecv(0), recvBuff(new char[BUFFER_LENGTH]), sendBuff(new char[BUFFER_LENGTH]), unuiqueKey(_id)
+	NetworkClient::NetworkClient(string _id) : bytesSent(0), bytesRecv(0), recvBuff(new char[BUFFER_LENGTH]), sendBuff(new char[BUFFER_LENGTH]), unuiqueKey(_id)
 	{
 		if (NO_ERROR != WSAStartup(MAKEWORD(2, 2), &wsaData))
 		{
@@ -96,9 +96,11 @@ namespace hackTeam {
 				throw (string)"avatar was not found in avatars map";
 
 
-			itr->second.location.x = stoi(location_x, 0, 10);
-			itr->second.location.y = stoi(location_y, 0, 10);
-			itr->second.status = status;
+			Location newLocation;
+			newLocation.x = stoi(location_x, 0, 10);
+			newLocation.y = stoi(location_y, 0, 10);
+			itr->second.setLocation(newLocation);
+			itr->second.setStatus(status);
 		}
 
 
@@ -110,25 +112,26 @@ namespace hackTeam {
 	void NetworkClient::registerAvatar(Avatar& avatar){
 
 		string stringToSend;
-		string locationInString = protocols.createStringFromLocation(avatar.location);
+		string locationInString = protocols.createStringFromLocation(avatar.getLocation());
 		
 		
 		stringToSend.insert(stringToSend.end(), protocols.Register);
 		stringToSend.append(unuiqueKey);
 		stringToSend.append(locationInString);
 		sendAndReceiveServer(stringToSend);
-		avatar.unuiqueKey.clear();
-		avatar.unuiqueKey.append(recvBuff);
+		string newUnuiqueKey;
+		newUnuiqueKey.append(recvBuff);
+		avatar.setUnuiqueKey(newUnuiqueKey);
 	}
-	void NetworkClient::getLocations(unordered_map<string, Avatar>& avatars, const Avatar& avatar)
+	void NetworkClient::getLocations(unordered_map<string, Avatar>& avatars, Avatar& avatar)
 	{
 		string stringToSend;
-		string locationInString = protocols.createStringFromLocation(avatar.location);
+		string locationInString = protocols.createStringFromLocation(avatar.getLocation());
 
 
 		stringToSend.insert(stringToSend.end(), protocols.Locations);
 		stringToSend.append(unuiqueKey);
-		stringToSend.insert(stringToSend.end(), avatar.status);
+		stringToSend.insert(stringToSend.end(), avatar.getStatus());
 		stringToSend.append(locationInString);
 		sendAndReceiveServer(stringToSend);
 		convertStringToAvatars(avatars);

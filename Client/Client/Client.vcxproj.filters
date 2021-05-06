@@ -21,12 +21,18 @@
     <ClCompile Include="NetworkClient.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Avatar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NetworkClient.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Protocols.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Avatar.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include <unordered_map>
 #include "Protocols.h"
+
 using namespace std;
 
 #define _WINSOCK_DEPRECATED_NO_WARNINGS
@@ -39,8 +40,8 @@ namespace hackTeam{
 
 	public:
 		Protocols protocols;
-		string& unuiqueKey; //this object contains the id since it's always being used.
-		NetworkClient(string& _id);
+		string unuiqueKey; //this object contains the id since it's always being used.
+		NetworkClient(string _id);
 		~NetworkClient();
 
 		//posts
@@ -52,7 +53,7 @@ namespace hackTeam{
 
 
 		//gets
-		void getLocations(unordered_map<string, Avatar>& avatars, const Avatar& avatar);
+		void getLocations(unordered_map<string, Avatar>& avatars, Avatar& avatar);
 
 
 

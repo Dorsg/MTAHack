@@ -3,6 +3,8 @@ import config
 from game_state import GameState
 
 from game import Game
+from PodSixNet.Connection import ConnectionListener, connection
+from time import sleep
 
 pygame.init()
 

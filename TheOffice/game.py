@@ -1,17 +1,22 @@
+from _xxsubinterpreters import destroy
+
 import pygame
 import config
 import math
 import webbrowser
 from player import Player
 from game_state import GameState
-from PodSixNet.Connection import ConnectionListener, connection
+from rootBuilder import TK
 
+<<<<<<< HEAD
 
 
 
 from time import sleep
+=======
+>>>>>>> d042dde706f74a509271b8607e599a7127ca0ad2
 
-class Game():
+class Game:
     def __init__(self, screen):
         self.screen = screen
         self.objects = []
@@ -19,8 +24,11 @@ class Game():
         self.map = []
         self.camera = [0, 0]
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> d042dde706f74a509271b8607e599a7127ca0ad2
     def set_up(self):
         player = Player(1, 1)
         self.player = player
@@ -34,12 +42,16 @@ class Game():
         self.screen.fill(config.BLACK)
         print("update")
         self.handle_events()
+
         self.render_map(self.screen)
 
         for object in self.objects:
             object.render(self.screen, self.camera)
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> d042dde706f74a509271b8607e599a7127ca0ad2
 
     def handle_events(self):
         for event in pygame.event.get():
@@ -70,7 +82,6 @@ class Game():
     def render_map(self, screen):
         self.determine_camera()
 
-
         y_pos = 0
         for line in self.map:
             x_pos = 0
@@ -95,12 +106,17 @@ class Game():
             return
 
         if self.map[new_position[1]][new_position[0]] == "N":
-            webbrowser.open('https://zoom.us/j/6275098211?pwd=YnE3NFpncVQ2WGRwckFoWXVTTzc0QT09')
-            return
+            string1 = "Join Zoom Conversation"
+            string2 = "I'm Busy , Quit "
+            root = TK(string1 , string2)
+            returns
         if self.map[new_position[1]][new_position[0]] == "T":
             return
+        if self.map[new_position[1]][new_position[0]] == "H":
+            self.status = "Rest"
         if self.map[new_position[1]][new_position[0]] == "L":
             return
+
 
         unit.update_position(new_position)
 
@@ -116,11 +132,11 @@ class Game():
             self.camera[1] = max_y_position
 
 
+
 map_tile_image = {
     "T": pygame.transform.scale(pygame.image.load("imgs/table.png"), (config.SCALE, config.SCALE)),
     "G": pygame.transform.scale(pygame.image.load("imgs/grass1.png"), (config.SCALE, config.SCALE)),
     "W": pygame.transform.scale(pygame.image.load("imgs/water.png"), (config.SCALE, config.SCALE)),
     "N": pygame.transform.scale(pygame.image.load("imgs/player.png"), (config.SCALE, config.SCALE)),
     "L": pygame.transform.scale(pygame.image.load("imgs/L.png"), (config.SCALE, config.SCALE))
-
 }

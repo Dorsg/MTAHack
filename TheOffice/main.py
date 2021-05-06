@@ -14,6 +14,7 @@ pygame.display.set_caption("Pokemon Clone")
 
 clock = pygame.time.Clock()
 
+
 game = Game(screen)
 game.set_up()
 

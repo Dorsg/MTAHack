@@ -5,16 +5,17 @@ import webbrowser
 from player import Player
 from game_state import GameState
 from PodSixNet.Connection import ConnectionListener, connection
+
 from time import sleep
 
-class Game(ConnectionListener):
+class Game():
     def __init__(self, screen):
         self.screen = screen
         self.objects = []
         self.game_state = GameState.NONE
         self.map = []
         self.camera = [0, 0]
-        self.Connect()
+
 
     def set_up(self):
         player = Player(1, 1)
@@ -26,8 +27,8 @@ class Game(ConnectionListener):
         self.load_map("01")
 
     def update(self):
-        connection.Pump()
-        self.Pump()
+
+
         self.screen.fill(config.BLACK)
         print("update")
         self.handle_events()
@@ -35,6 +36,8 @@ class Game(ConnectionListener):
 
         for object in self.objects:
             object.render(self.screen, self.camera)
+       
+
 
     def handle_events(self):
         for event in pygame.event.get():
@@ -64,6 +67,7 @@ class Game(ConnectionListener):
 
     def render_map(self, screen):
         self.determine_camera()
+
 
         y_pos = 0
         for line in self.map:

@@ -1,26 +1,29 @@
-import PodSixNet.Channel
-import PodSixNet.Server
-from time import sleep
+from PodSixNet.Channel import Channel
+from PodSixNet.Server import Server
+import time
 
+class ClientChannel(Channel):
 
-class ClientChannel(PodSixNet.Channel.Channel):
     def Network(self, data):
-        print
-        data
+        print(data)
 
+    def Network_myaction(self, data):
+        print("myaction:", data)
 
-class BoxesServer(PodSixNet.Server.Server):
+class MyServer(Server):
     channelClass = ClientChannel
 
     def Connected(self, channel, addr):
-        print('new connection:', channel);
+            print('new connection:', channel)
 
+myserver = MyServer()
 
-
-print("STARTING SERVER ON LOCALHOST")
-
-boxesServe = BoxesServer()
 while True:
-    boxesServe.Pump()
-    sleep(0.01)
+
+    myserver.Pump()
+    time.sleep(0.0001)
+
+
+
+
 

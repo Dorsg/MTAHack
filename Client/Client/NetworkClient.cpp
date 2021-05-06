@@ -1,5 +1,6 @@
-#include "NetworkClient.h"
 #define _CRT_SECURE_NO_WARNINGS
+#include "NetworkClient.h"
+
 using namespace std;
 namespace hackTeam {
 
@@ -48,7 +49,7 @@ namespace hackTeam {
 
 		
 		const char* stringC = stringToSend.c_str();
-		strcpy(sendBuff, stringC);
+		strncpy(sendBuff, stringC, strlen(sendBuff));
 		
 		bytesSent = sendto(connSocket, sendBuff, (int)strlen(sendBuff), 0, (const sockaddr*)&server, sizeof(server));
 		if (SOCKET_ERROR == bytesSent)

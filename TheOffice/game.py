@@ -93,6 +93,7 @@ class Game():
             return
 
         if self.map[new_position[1]][new_position[0]] == "N":
+            webbrowser.open('https://zoom.us/j/6275098211?pwd=YnE3NFpncVQ2WGRwckFoWXVTTzc0QT09')
             return
         if self.map[new_position[1]][new_position[0]] == "T":
             return

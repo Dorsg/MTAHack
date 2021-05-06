@@ -18,6 +18,7 @@ void main()
 
 
 	unordered_map<string, Avatar> avatars;
+	//unordered_map<Location, string> avatarsLocations;
 
 
 	Avatar Adam;

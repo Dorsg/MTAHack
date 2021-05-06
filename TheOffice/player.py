@@ -6,7 +6,7 @@ class Player:
         print("player created")
         self.position = [x_postition, y_position]
         self.image = pygame.image.load("imgs/player.png")
-        self.image = pygame.transform.scale(self.image, (config.SCALE, config.SCALE))
+        self.image = pygame.transform.scale(self.image, (config.SCALE * 2, config.SCALE * 2))
         self.rect = pygame.Rect(self.position[0] * config.SCALE, self.position[1] * config.SCALE, config.SCALE, config.SCALE)
 
     def update(self):

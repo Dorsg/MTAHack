@@ -85,6 +85,10 @@ class Game:
 
         if self.map[new_position[1]][new_position[0]] == "N":
             return
+        if self.map[new_position[1]][new_position[0]] == "T":
+            return
+        if self.map[new_position[1]][new_position[0]] == "L":
+            return
 
         unit.update_position(new_position)
 
@@ -101,7 +105,10 @@ class Game:
 
 
 map_tile_image = {
+    "T": pygame.transform.scale(pygame.image.load("imgs/table.png"), (config.SCALE, config.SCALE)),
     "G": pygame.transform.scale(pygame.image.load("imgs/grass1.png"), (config.SCALE, config.SCALE)),
     "W": pygame.transform.scale(pygame.image.load("imgs/water.png"), (config.SCALE, config.SCALE)),
-    "N": pygame.transform.scale(pygame.image.load("imgs/player.png"), (config.SCALE, config.SCALE))
+    "N": pygame.transform.scale(pygame.image.load("imgs/player.png"), (config.SCALE, config.SCALE)),
+    "L": pygame.transform.scale(pygame.image.load("imgs/L.png"), (config.SCALE, config.SCALE))
+
 }

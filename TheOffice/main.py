@@ -18,6 +18,7 @@ clock = pygame.time.Clock()
 game = Game(screen)
 game.set_up()
 
+
 while game.game_state == GameState.RUNNING:
     clock.tick(50)
     game.update()

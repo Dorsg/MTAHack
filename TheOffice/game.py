@@ -83,6 +83,9 @@ class Game:
         if self.map[new_position[1]][new_position[0]] == "W":
             return
 
+        if self.map[new_position[1]][new_position[0]] == "N":
+            return
+
         unit.update_position(new_position)
 
     def determine_camera(self):
@@ -99,6 +102,6 @@ class Game:
 
 map_tile_image = {
     "G": pygame.transform.scale(pygame.image.load("imgs/grass1.png"), (config.SCALE, config.SCALE)),
-    "W": pygame.transform.scale(pygame.image.load("imgs/water.png"), (config.SCALE, config.SCALE))
+    "W": pygame.transform.scale(pygame.image.load("imgs/water.png"), (config.SCALE, config.SCALE)),
     "N": pygame.transform.scale(pygame.image.load("imgs/player.png"), (config.SCALE, config.SCALE))
 }

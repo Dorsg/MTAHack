@@ -1,18 +1,29 @@
-#!/usr/bin/env python3
+from PodSixNet.Channel import Channel
+from PodSixNet.Server import Server
+import time
 
-import socket
+class ClientChannel(Channel):
 
-HOST = '127.0.0.1'  # Standard loopback interface address (localhost)
-PORT = 3000       # Port to listen on (non-privileged ports are > 1023)
+    def Network(self, data):
+        print(data)
 
-with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-    s.bind((HOST, PORT))
-    s.listen()
-    conn, addr = s.accept()
-    with conn:
-        print('Connected by', addr)
-        while True:
-            data = conn.recv(1024)
-            if not data:
-                break
-            print(data)
+    def Network_myaction(self, data):
+        print("myaction:", data)
+
+class MyServer(Server):
+    channelClass = ClientChannel
+
+    def Connected(self, channel, addr):
+            print('new connection:', channel)
+
+myserver = MyServer()
+
+while True:
+
+    myserver.Pump()
+    time.sleep(0.0001)
+
+
+
+
+

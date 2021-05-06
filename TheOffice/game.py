@@ -6,9 +6,6 @@ from player import Player
 from game_state import GameState
 from PodSixNet.Connection import ConnectionListener, connection
 
-
-
-
 from time import sleep
 
 class Game():
@@ -18,7 +15,6 @@ class Game():
         self.game_state = GameState.NONE
         self.map = []
         self.camera = [0, 0]
-
 
 
     def set_up(self):
@@ -31,6 +27,8 @@ class Game():
         self.load_map("01")
 
     def update(self):
+
+
         self.screen.fill(config.BLACK)
         print("update")
         self.handle_events()
@@ -38,7 +36,7 @@ class Game():
 
         for object in self.objects:
             object.render(self.screen, self.camera)
-
+       
 
 
     def handle_events(self):

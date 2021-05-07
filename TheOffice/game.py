@@ -8,6 +8,9 @@ from PodSixNet.Connection import ConnectionListener, connection
 
 from time import sleep
 
+from rootBuilder import TK
+
+
 class Game():
     def __init__(self, screen):
         self.screen = screen
@@ -18,7 +21,7 @@ class Game():
 
 
     def set_up(self):
-        player = Player(1, 1)
+        player = Player(2, 15)
         self.player = player
         self.objects.append(player)
         print("do set up")
@@ -28,7 +31,6 @@ class Game():
 
     def update(self):
 
-
         self.screen.fill(config.BLACK)
         print("update")
         self.handle_events()
@@ -36,8 +38,6 @@ class Game():
 
         for object in self.objects:
             object.render(self.screen, self.camera)
-       
-
 
     def handle_events(self):
         for event in pygame.event.get():
@@ -67,8 +67,6 @@ class Game():
 
     def render_map(self, screen):
         self.determine_camera()
-
-
         y_pos = 0
         for line in self.map:
             x_pos = 0
@@ -89,10 +87,27 @@ class Game():
         if new_position[1] < 0 or new_position[1] > (len(self.map) - 1):
             return
 
+        if self.map[new_position[1]][new_position[0]] == "G":
+            self.player.status = "Avalible"
+
         if self.map[new_position[1]][new_position[0]] == "W":
             return
 
-        if self.map[new_position[1]][new_position[0]] == "N":
+        if self.map[new_position[1]][new_position[0]] == "E":
+            self.game_state = 2
+            return
+        if self.map[new_position[1]][new_position[0]] == "H":
+            self.player.status = "Busy"
+
+        if self.map[new_position[1]][new_position[0]] == "M":
+            string1 = "Join Zoom Conversation"
+            string2 = "I'm Busy , Quit "
+            root = TK(string1, string2)
+            return
+        if self.map[new_position[1]][new_position[0]] == "Z":
+            string1 = "Join Launch "
+            string2 = "Eat Alone , Quit "
+            root = TK(string1, string2)
             return
         if self.map[new_position[1]][new_position[0]] == "T":
             return
@@ -104,7 +119,6 @@ class Game():
     def determine_camera(self):
         max_y_position = len(self.map) - config.SCREEN_HEIGHT / config.SCALE
         y_position = self.player.position[1] - math.ceil(round(config.SCREEN_HEIGHT/ config.SCALE / 2))
-
         if y_position <= max_y_position and y_position >= 0:
             self.camera[1] = y_position
         elif y_position < 0:
@@ -112,12 +126,13 @@ class Game():
         else:
             self.camera[1] = max_y_position
 
-
 map_tile_image = {
     "T": pygame.transform.scale(pygame.image.load("imgs/table.png"), (config.SCALE, config.SCALE)),
+    "Z": pygame.transform.scale(pygame.image.load("imgs/table.png"), (config.SCALE, config.SCALE)),
     "G": pygame.transform.scale(pygame.image.load("imgs/grass1.png"), (config.SCALE, config.SCALE)),
+    "H": pygame.transform.scale(pygame.image.load("imgs/grass1.png"), (config.SCALE, config.SCALE)),
     "W": pygame.transform.scale(pygame.image.load("imgs/water.png"), (config.SCALE, config.SCALE)),
-    "N": pygame.transform.scale(pygame.image.load("imgs/player.png"), (config.SCALE, config.SCALE)),
+    "M": pygame.transform.scale(pygame.image.load("imgs/Mario.png"), (config.SCALE, config.SCALE)),
+    "E": pygame.transform.scale(pygame.image.load("imgs/exit.png"), (config.SCALE, config.SCALE)),
     "L": pygame.transform.scale(pygame.image.load("imgs/L.png"), (config.SCALE, config.SCALE))
-
 }

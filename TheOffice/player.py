@@ -8,6 +8,7 @@ class Player:
         self.image = pygame.image.load("imgs/player.png")
         self.image = pygame.transform.scale(self.image, (config.SCALE , config.SCALE ))
         self.rect = pygame.Rect(self.position[0] * config.SCALE, self.position[1] * config.SCALE, config.SCALE, config.SCALE)
+        self.status = "Online"
 
     def update(self):
         print("player updated")

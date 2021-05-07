@@ -10,7 +10,7 @@ pygame.init()
 
 screen = pygame.display.set_mode((config.SCREEN_WIDTH, config.SCREEN_HEIGHT))
 
-pygame.display.set_caption("Pokemon Clone")
+pygame.display.set_caption("The Office")
 
 clock = pygame.time.Clock()
 

@@ -1,15 +1,18 @@
+import tkinter
+
 import pygame
 import config
 import math
 import webbrowser
 from player import Player
 from game_state import GameState
-from PodSixNet.Connection import ConnectionListener, connection
 
+from PodSixNet.Connection import ConnectionListener, connection
 from time import sleep
 
 from rootBuilder import TK
 
+import easygui
 
 class Game():
     def __init__(self, screen):
@@ -88,7 +91,8 @@ class Game():
             return
 
         if self.map[new_position[1]][new_position[0]] == "G":
-            self.player.status = "Avalible"
+            if self.player.status == "Busy":
+                self.player.status = "Availible"
 
         if self.map[new_position[1]][new_position[0]] == "W":
             return
@@ -96,8 +100,16 @@ class Game():
         if self.map[new_position[1]][new_position[0]] == "E":
             self.game_state = 2
             return
+
         if self.map[new_position[1]][new_position[0]] == "H":
-            self.player.status = "Busy"
+            if self.player.status == "Availible":
+                self.player.status = "Busy"
+
+        if self.map[new_position[1]][new_position[0]] == "C":
+            string1 = "Join Confernse Room"
+            string2 = "Can't join right now, Quit "
+            root = TK(string1, string2)
+            return
 
         if self.map[new_position[1]][new_position[0]] == "M":
             string1 = "Join Zoom Conversation"
@@ -109,8 +121,18 @@ class Game():
             string2 = "Eat Alone , Quit "
             root = TK(string1, string2)
             return
+
+        if self.map[new_position[1]][new_position[0]] == "S":
+            webbrowser.open('https://weather.com/weather/tenday/l/Tel+Aviv+Tel+Aviv+District+Israel?canonicalCityId=f156cd0dd9268088b98f5de72a0e74a26c2645748ebdd593c3b21f939014c29e')
+            return
+
+        if self.map[new_position[1]][new_position[0]] == "Q":
+            webbrowser.open('https://open.spotify.com/track/5NUCLgfK7d3zJeOJN0hZIv?si=8ce0afa770bc49e2')
+            return
+
         if self.map[new_position[1]][new_position[0]] == "T":
             return
+
         if self.map[new_position[1]][new_position[0]] == "L":
             return
 
@@ -129,8 +151,11 @@ class Game():
 map_tile_image = {
     "T": pygame.transform.scale(pygame.image.load("imgs/table.png"), (config.SCALE, config.SCALE)),
     "Z": pygame.transform.scale(pygame.image.load("imgs/table.png"), (config.SCALE, config.SCALE)),
+    "C": pygame.transform.scale(pygame.image.load("imgs/table.png"), (config.SCALE, config.SCALE)),
     "G": pygame.transform.scale(pygame.image.load("imgs/grass1.png"), (config.SCALE, config.SCALE)),
     "H": pygame.transform.scale(pygame.image.load("imgs/grass1.png"), (config.SCALE, config.SCALE)),
+    "Q": pygame.transform.scale(pygame.image.load("imgs/Spotify.png"), (config.SCALE, config.SCALE)),
+    "S": pygame.transform.scale(pygame.image.load("imgs/Ski.png"), (config.SCALE, config.SCALE)),
     "W": pygame.transform.scale(pygame.image.load("imgs/water.png"), (config.SCALE, config.SCALE)),
     "M": pygame.transform.scale(pygame.image.load("imgs/Mario.png"), (config.SCALE, config.SCALE)),
     "E": pygame.transform.scale(pygame.image.load("imgs/exit.png"), (config.SCALE, config.SCALE)),

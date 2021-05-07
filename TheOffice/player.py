@@ -1,9 +1,5 @@
 import pygame
 import config
-import socket
-
-HOST = '127.0.0.1'  # The server's hostname or IP address
-PORT = 3000        # The port used by the server
 
 class Player:
     def __init__(self, x_postition, y_position):
@@ -15,13 +11,6 @@ class Player:
 
     def update(self):
         print("player updated")
-        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-            s.connect((HOST, PORT))
-            s.send(self.position)
-            data = s.recv(1024)
-
-        print('Received', repr(data))
-
 
     def update_position(self, new_position):
         self.position[0] = new_position[0]
